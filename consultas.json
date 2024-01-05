@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "confirmado": true,
+        "data": "12/12/1222 00:10",
+        "id_paciente": 2,
+        "id_medico": 1
+    },
+    {
+        "id": 2,
+        "confirmado": "True",
+        "data": "12/12/1222 00:10",
+        "id_paciente": 2,
+        "id_medico": 1
+    },
+    {
+        "id": 3,
+        "confirmado": "True",
+        "data": "06/01/2024 00:00",
+        "id_paciente": 2,
+        "id_medico": 1
+    }
+]

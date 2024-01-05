@@ -1,0 +1,63 @@
+import json
+from models.modelo import Modelo
+
+class Paciente:
+  def __init__(self, id, nome, fone, email, senha):
+    self.__id = id
+    self.__nome = nome
+    self.__fone = fone
+    self.__email = email
+    self.__senha = senha
+
+  def get_id(self): return self.__id
+  def get_nome(self): return self.__nome
+  def get_fone(self): return self.__fone
+  def get_email(self): return self.__email
+  def get_senha(self): return self.__senha
+
+  def set_id(self, id): self.__id = id
+  def set_nome(self, nome): self.__nome = nome
+  def set_fone(self, fone): self.__fone = fone
+  def set_email(self, email): self.__email = email
+  def set_senha(self, senha): self.__senha = senha
+
+  def __eq__(self, x):
+    if self.__id == x.__id and self.__nome == x.__nome and self.__fone == x.__fone and self.__email == x.__email and self.__senha == x.__senha:
+      return True
+    return False
+
+  def __str__(self):
+    return f"{self.__id} - {self.__nome} - {self.__fone} - {self.__email} - {self.__senha}"
+
+  def to_json(self):
+    return {
+      'id': self.__id,
+      'nome': self.__nome,
+      'fone': self.__fone,
+      'email': self.__email,
+      'senha': self.__senha
+    }
+
+
+class NPaciente(Modelo):
+
+  @classmethod
+  def abrir(cls):
+    cls.objetos = []
+    try:
+      with open("pacientes.json", mode="r") as arquivo:
+        pacientes_json = json.load(arquivo)
+        for obj in pacientes_json:
+          aux = Paciente(obj["_Paciente__id"], 
+                        obj["_Paciente__nome"], 
+                        obj["_Paciente__fone"],
+                        obj["_Paciente__email"],
+                        obj["_Paciente__senha"])
+          cls.objetos.append(aux)
+    except FileNotFoundError:
+      pass
+
+  @classmethod
+  def salvar(cls):
+    with open("pacientes.json", mode="w") as arquivo:
+      json.dump(cls.objetos, arquivo, default=vars)
